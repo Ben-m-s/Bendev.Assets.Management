@@ -87,7 +87,7 @@
     # FileList = @()
 
     # Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
-    PrivateData            = @{
+    PrivateData  = @{
 
         PSData = @{
 
@@ -95,10 +95,10 @@
              Tags = @('Sitecore', 'Docker', 'Install', 'Transform', 'Assets')
 
             # A URL to the license for this module.
-            # LicenseUri = ''
+            LicenseUri = 'https://github.com/Ben-m-s/Bendev.Assets.Management/blob/master/LICENSE'
 
             # A URL to the main website for this project.
-            # ProjectUri = ''
+            ProjectUri = 'https://github.com/Ben-m-s/Bendev.Assets.Management'
 
             # A URL to an icon representing this module.
             # IconUri = ''
@@ -111,7 +111,7 @@
     } # End of PrivateData hashtable
 
     # HelpInfo URI of this module
-    # HelpInfoURI = ''
+    HelpInfoURI = 'http://bendev.es/'
 
     # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
     # DefaultCommandPrefix = ''
