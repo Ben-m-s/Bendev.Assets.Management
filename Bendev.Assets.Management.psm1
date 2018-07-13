@@ -1,8 +1,29 @@
-function Invoke-ProcessAssets([Asset[]]$assets, [String]$AssetsSourcePath, [String]$AssetsTransformPath, [String]$targetPath, [string]$imagePath){
-	$assets | ForEach-Object {
+function Invoke-ProcessAssets{
+	param(
+		[Parameter(Mandatory = $true)]
+        [Asset[]]$Assets, 
+		[Parameter(Mandatory = $true)]
+		[ValidateScript( {Test-Path $_ -PathType 'Container'})] 
+        [String]$AssetsSourcePath, 
+		[Parameter(Mandatory = $true)]
+		[ValidateScript( {Test-Path $_ -PathType 'Container'})] 
+        [String]$TargetPath, 
+		[Parameter(Mandatory = $false)]
+		[ValidateScript( {[String]::IsNullOrWhiteSpace($AssetsTransformPath) -or (Test-Path $_ -PathType 'Container')})] 
+        [String]$AssetsTransformPath, 
+		[Parameter(Mandatory = $false)]
+		[ValidateScript( {Test-Path $_ -PathType 'Container'})] 
+        [string]$PSTransformationsSourcePath
+    )
+
+    if ([String]::IsNullOrWhiteSpace($AssetsTransformPath)){
+       $AssetsTransformPath = $AssetsSourcePath;
+    }
+
+	$Assets | ForEach-Object {
 		$assetMetadata = $_;
         $assetPath = Join-Path $AssetsSourcePath $assetMetadata.SourcePath;
-        $transformArgs = [TransformExecutionArgs]::new($assetPath, $AssetsTransformPath, $imagePath)
+        $transformArgs = [TransformExecutionArgs]::new($assetPath, $AssetsTransformPath, $PSTransformationsSourcePath)
         if($assetMetadata.Transforms){
             $assetMetadata.Transforms | ForEach-Object{
                 $transform = $_;
@@ -12,7 +33,7 @@ function Invoke-ProcessAssets([Asset[]]$assets, [String]$AssetsSourcePath, [Stri
             }
         }
 		if ($assetMetadata.Assets){
-            Invoke-ProcessAssets $assetMetadata.Assets $transformArgs.AssetPath $transformArgs.TransformPath $targetPath $imagePath
+            Invoke-ProcessAssets $assetMetadata.Assets $transformArgs.AssetPath $TargetPath $transformArgs.TransformPath $PSTransformationsSourcePath
 		}
 
         [Boolean]$shouldCopy = (($assetMetadata.CopyMode -eq [CopyMode]::Copy) -Or (-Not $assetMetadata.Assets));
@@ -20,9 +41,9 @@ function Invoke-ProcessAssets([Asset[]]$assets, [String]$AssetsSourcePath, [Stri
 		    $assetItem = Get-Item -Path $assetPath;
 
             if ($assetMetadata.TargetPath){
-    		    $destinationFolder = Join-Path $targetPath $assetMetadata.TargetPath
+    		    $destinationFolder = Join-Path $TargetPath $assetMetadata.TargetPath
             }else{
-    		    $destinationFolder = $targetPath
+    		    $destinationFolder = $TargetPath
             }
 
 			#Copy-Item $assetItem -Destination $newTargetPath -Verbose:$VerbosePreference -Recurse -Force
