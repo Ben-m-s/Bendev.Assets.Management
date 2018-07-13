@@ -181,7 +181,7 @@ As any standard PowerShell module, Bendev Assets Management module needs to be i
 
 Once the module is downloaded it can be imported with the following command:
 
-    Import-Module –Name $PathToTheModulesFolder -Force -Verbose
+    Import-Module -Name $PathToTheModulesFolder -Force -Verbose
 
 The above cmdlet requires to know where the module is in the local machine. This requirement can be skipped by installing the module in a standard location where PowerShell can find it. Which can be achieved by running the PowerShell script named "install.ps1", located in the root folder of the module.
 
@@ -244,7 +244,7 @@ Although we have already seen them, they have not been properly introduced. Modu
 
 #### UnzipTransform
 
-It uses the PowerShell cmdlet [Expand-Archive]{https://docs.microsoft.com/en-us/PowerShell/module/microsoft.PowerShell.archive/expand-archive} to decompress zip files.
+It uses the PowerShell cmdlet [Expand-Archive](https://docs.microsoft.com/en-us/PowerShell/module/microsoft.PowerShell.archive/expand-archive) to decompress zip files.
 
 #### DotNetUnzipTransform
 
