@@ -175,7 +175,7 @@ The prerequisites to use the module are as follow:
  - Local folder where temporary files and folders will be saved
  - Local Target folder where the final output will be saved.
 
-## Importing the Module
+## Installing and Importing the Module
 
 As any standard PowerShell module, Bendev Assets Management module needs to be imported to be available. Before that, it needs to be downloaded from [GitHub](https://github.com/Ben-m-s/Bendev.Assets.Management).
 
@@ -183,11 +183,37 @@ Once the module is downloaded it can be imported with the following command:
 
     Import-Module -Name $PathToTheModulesFolder -Force -Verbose
 
-The above cmdlet requires to know where the module is in the local machine. This requirement can be skipped by installing the module in a standard location where PowerShell can find it. Which can be achieved by running the PowerShell script named "install.ps1", located in the root folder of the module.
+The above cmdlet requires you to provide where the module is stored in the local machine. This requirement can be skipped by installing the module in a standard location where PowerShell can find it. Which can be achieved by running the PowerShell script named "install.ps1", located in the root folder of the module.
 
 Once the module is installed, it can be imported as follows:
 
     Import-Module Bendev.Assets.Management -Force -Verbose
+
+### PowerShell Gallery
+
+The module is also available through the [PowerShell Gallery](https://www.powershellgallery.com/packages/Bendev.Assets.Management). This means that you can downloading and install it in one single step, without providing any URL or local path. This is the most convenient way to do it. The required command is as follows:
+
+	Install-Module -Name "Bendev.Assets.Management"
+
+Running the previous cmdlet (Install-Module) without having explicitly trusted the PowerShell Gallery (PSGallery) you get the following message:
+
+    *Untrusted repository
+    You are installing the modules from an untrusted repository. If you trust this repository, 
+    change its InstallationPolicy value by running the Set-PSRepository cmdlet. Are you sure you 
+    want to install the modules from 'PSGallery'?
+    [Y] Yes  [A] Yes to All  [N] No  [L] No to All  [S] Suspend  [?] Help (default is "N"):*
+
+
+You still can install the module by clicking "Y".
+
+Alternatively, to avoid the message, you can trust the repository by running:
+
+	Set-PSRepository -Name "PSGallery" -InstallationPolicy Trusted
+
+The inverse operation, to un-trust the repository, is:
+
+	Set-PSRepository -Name "PSGallery" -InstallationPolicy Untrusted
+
 
 ## Examples provided with the module
 
