@@ -4,7 +4,7 @@
     RootModule             = 'Bendev.Assets.Management.psm1'
 
     # Version number of this module.
-    ModuleVersion          = '1.0'
+    ModuleVersion          = '1.0.0.1'
 
     # ID used to uniquely identify this module
     GUID                   = '03742115-6c2a-4f0a-8ef7-a9e31bcbad20'
@@ -104,7 +104,7 @@
             # IconUri = ''
 
             # ReleaseNotes of this module
-            # ReleaseNotes = ''
+            ReleaseNotes = 'Minor changes in documentation'
 
         } # End of PSData hashtable
 
