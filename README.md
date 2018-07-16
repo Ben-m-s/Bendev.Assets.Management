@@ -189,7 +189,7 @@ Once the module is installed, it can be imported as follows:
 
     Import-Module Bendev.Assets.Management -Force -Verbose
 
-### PowerShell Gallery
+### Installing from PowerShell Gallery
 
 The module is also available through the [PowerShell Gallery](https://www.powershellgallery.com/packages/Bendev.Assets.Management). This means that you can downloading and install it in one single step, without providing any URL or local path. This is the most convenient way to do it. The required command is as follows:
 
