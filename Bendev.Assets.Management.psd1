@@ -4,7 +4,7 @@
     RootModule             = 'Bendev.Assets.Management.psm1'
 
     # Version number of this module.
-    ModuleVersion          = '1.0.0.1'
+    ModuleVersion          = '1.0.0.2'
 
     # ID used to uniquely identify this module
     GUID                   = '03742115-6c2a-4f0a-8ef7-a9e31bcbad20'
@@ -49,15 +49,7 @@
     )
 
     # Script files (.ps1) that are run in the caller's environment prior to importing this module.
-    ScriptsToProcess = @(
-            'classes\CopyMode.ps1', 
-            'classes\TransformExecutionArgs.ps1', 
-            'classes\Transform.ps1', 
-            'classes\Asset.ps1', 
-            'classes\PowerShellScriptTransform.ps1', 
-            'classes\UnzipTransform.ps1', 
-            'classes\DotNetUnzipTransform.ps1'
-    )
+    #ScriptsToProcess = @()
 
     # Type files (.ps1xml) to be loaded when importing this module
     # TypesToProcess = @()
@@ -104,7 +96,7 @@
             # IconUri = ''
 
             # ReleaseNotes of this module
-            ReleaseNotes = 'Minor changes in documentation'
+            ReleaseNotes = 'Merge module''s files into single script to solve issues instantiating classes'
 
         } # End of PSData hashtable
 
