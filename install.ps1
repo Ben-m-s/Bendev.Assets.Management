@@ -27,10 +27,8 @@ Write-Output "Path: $targetPath"
 Remove-Item "$targetPath\*" -Verbose -Recurse -Force
 
 
-md "$targetPath\classes" -Force 
 $filesToExclude = @( "install.ps1", "Tests", "*.tests.ps1")
 
 Copy-Item -Path $modulePath\* -Destination "$targetPath" -Include *.psd1, *.psm1, *.ps1, *.md -Exclude $filesToExclude   -Force -Verbose -Recurse 
-Copy-Item -Recurse -Path $modulePath\classes\* -Destination "$targetPath\classes" -Include *.psd1, *.psm1, *.ps1 -Exclude $filesToExclude -Force -Verbose
 
 #endregion
