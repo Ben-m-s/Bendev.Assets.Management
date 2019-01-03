@@ -5,30 +5,35 @@
 $moduleName = "Bendev.Assets.Management"
 $projectFolder = Split-Path -Parent $MyInvocation.MyCommand.Path
 $solutionFolder = Split-Path -Parent $projectFolder
-#$modulePath = Join-Path $projectFolder -ChildPath $moduleName 
+#$modulePath = Join-Path $projectFolder -ChildPath $moduleName
 #$modulePath = "$moduleName"
 $modulePath = "$projectFolder"
 
 
 #region Install module"
-
-$targetPath = Join-Path $env:ProgramFiles -ChildPath "\WindowsPowerShell\Modules\$moduleName"
-
-if( -not (Test-Path -Path $targetPath))
+Foreach ($psPath in $env:PSModulePath.Split(";"))
 {
-	md $targetPath
+	if ($psPath -like 'C:\Program Files\*PowerShell\Modules')
+	{
+		$targetPath = Join-Path $psPath "$moduleName"
+
+		if( -not (Test-Path -Path $targetPath))
+		{
+			md $targetPath
+		}
+
+		Write-Output "SolutionFolder:" $solutionFolder
+		Write-Output "ProjectFolder:" $projectFolder
+		Write-Output "Source: $modulePath"
+		Write-Output "Path: $targetPath"
+
+		Remove-Item "$targetPath\*" -Verbose -Recurse -Force
+
+
+		$filesToExclude = @( "install.ps1", "Tests", "*.tests.ps1")
+
+		Copy-Item -Path $modulePath\* -Destination "$targetPath" -Include *.psd1, *.psm1, *.ps1, *.md -Exclude $filesToExclude   -Force -Verbose -Recurse
+		Break
+	}
 }
-
-Write-Output "SolutionFolder:" $solutionFolder
-Write-Output "ProjectFolder:" $projectFolder
-Write-Output "Source: $modulePath"
-Write-Output "Path: $targetPath"
-
-Remove-Item "$targetPath\*" -Verbose -Recurse -Force
-
-
-$filesToExclude = @( "install.ps1", "Tests", "*.tests.ps1")
-
-Copy-Item -Path $modulePath\* -Destination "$targetPath" -Include *.psd1, *.psm1, *.ps1, *.md -Exclude $filesToExclude   -Force -Verbose -Recurse 
-
 #endregion
